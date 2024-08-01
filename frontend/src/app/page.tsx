@@ -6,9 +6,17 @@ export default function Home() {
   const [empCode, setEmpCode] = useState(0);
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    await fetch('http://api:8080/login', {
+    const response = await fetch('http://localhost:8080/login', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       method: "POST",
+      body: JSON.stringify({ id: empCode })
     });
+
+    const json = await response.json();
+    console.log(json);
   }
   return (
 
@@ -39,7 +47,7 @@ export default function Home() {
       <button
         className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
         type="submit"
-        onSubmit={(e) => handleSubmit(e)}
+        onClick={(e) => handleSubmit(e)}
       >
         Sign in
       </button>

@@ -24,7 +24,7 @@ export class AppController {
     };
   }
 
-  @Post('/login')
+  @Post('login')
   async makeLogin(@Body() login: { id: number }) {
     const user = await this.prisma.user.findFirst({
       where: {
@@ -41,7 +41,7 @@ export class AppController {
     return user;
   }
 
-  @Post('/product')
+  @Post('product')
   async createProduct(@Body() createProductDTO: CreateProductDTO) {
     const response = await this.prisma.product.create({
       data: createProductDTO,
@@ -50,12 +50,12 @@ export class AppController {
     return response;
   }
 
-  @Get('/product')
+  @Get('product')
   async getProducts() {
     return await this.prisma.product.findMany();
   }
 
-  @Post('/sale')
+  @Post('sale')
   async makeSale(@Body() createSaleDTO: CreateSaleDTO) {
     const sale = await this.prisma.sale.create({
       data: {

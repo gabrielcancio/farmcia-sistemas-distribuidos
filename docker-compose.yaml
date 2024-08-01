@@ -4,7 +4,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    entrypoint: ["npm", "start"]
+    entrypoint: ["npx", "prisma", "migrate", "dev", " --name", "init", ";", "npm", "start"]
     container_name: api
     volumes:
       - ./api:/app
